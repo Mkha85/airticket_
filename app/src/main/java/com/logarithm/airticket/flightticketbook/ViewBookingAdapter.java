@@ -15,7 +15,7 @@ import java.util.List;
 public class ViewBookingAdapter extends RecyclerView.Adapter<ViewBookingAdapter.MyViewHolder> {
 
     List<Message> tripList;
-    //AlertDialog alertDialog = null;
+    AlertDialog alertDialog = null;
     Context context;
     public ViewBookingAdapter(Context context, List<com.logarithm.airticket.flightticketbook.ModelClass.ViewBooking.Message> tripList) {
         this.context = context;
@@ -34,7 +34,7 @@ public class ViewBookingAdapter extends RecyclerView.Adapter<ViewBookingAdapter.
           // set the data in items
         try {
             Message flight = tripList.get(position);
-              holder.from.setText(flight.getFrom());
+            holder.from.setText(flight.getFrom());
             holder.to.setText(flight.getTo());
             holder.date.setText(flight.getDepartDate());
             holder.time.setText(flight.getSourceTime());
@@ -68,7 +68,7 @@ public class ViewBookingAdapter extends RecyclerView.Adapter<ViewBookingAdapter.
                 date = itemView.findViewById(R.id.date);
                 time = itemView.findViewById(R.id.time);
                 travelType = itemView.findViewById(R.id.travelType);
-                passengername = itemView.findViewById(R.id.passengername);
+                passengername = itemView.findViewById(R.id.passengerName);
                 FlightNumber = itemView.findViewById(R.id.FlightNumber);
                 FlicketName = itemView.findViewById(R.id.FlicketName);
                 flightId = itemView.findViewById(R.id.flightId);

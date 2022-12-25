@@ -40,7 +40,7 @@ public class AddFlight extends AppCompatActivity {
 
     TextView name,flightNo,flightID,source,dest,sourceDate,destDate,sourceTime,destTime,FPrice,BPrice,PPrice,EPrice;
     Button addFlight;
-//    AlertDialog alertDialog;
+    AlertDialog alertDialog;
     ArrayList<String> fruits;
     AutoCompleteTextView actv;
 
@@ -54,9 +54,9 @@ public class AddFlight extends AppCompatActivity {
         fruits=new ArrayList<>();
 
         try {
-//            alertDialog = new SpotsDialog(AddFlight.this);
-//            alertDialog.setMessage("Getting Airports info..");
-//            alertDialog.show();
+            alertDialog = new AlertDialog.Builder(AddFlight.this).create();
+            alertDialog.setMessage("Getting Airports info..");
+           alertDialog.show();
             final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
             Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call2 = apiService.getAllAirports(TOKEN_ID_ADMIN);
             call2.enqueue(new Callback<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport>() {
@@ -64,7 +64,7 @@ public class AddFlight extends AppCompatActivity {
 
                 public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> response) {
                     try {
-//                        alertDialog.dismiss();
+                        alertDialog.dismiss();
                         Log.i("JSON", response.body().getSuccess().toString());
                         if (response.body().getSuccess()) {
 
@@ -74,13 +74,13 @@ public class AddFlight extends AppCompatActivity {
 
                             }
 
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                         } else {
                             Log.i("TEST", response.body().getMessage().toString());
                         }
                     } catch (Exception e) {
-//                        alertDialog.dismiss();
+                        alertDialog.dismiss();
                         Toast.makeText(AddFlight.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
 
@@ -89,7 +89,7 @@ public class AddFlight extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call, Throwable t) {
-//                    alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Toast.makeText(AddFlight.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -187,9 +187,9 @@ public class AddFlight extends AppCompatActivity {
         addFlight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                alertDialog = new SpotsDialog(AddFlight.this);
-//                alertDialog.setMessage("Adding Flight... ");
-//                alertDialog.show();
+                alertDialog = new AlertDialog.Builder(AddFlight.this).create();
+                alertDialog.setMessage("Adding Flight... ");
+                alertDialog.show();
                 if (flightID.getText().length() > 0 && flightNo.getText().length() > 0 && flightID.length() >0 && actvv.length() >0  && actv.length() >0  && sourceDate.length() >0  && sourceTime.length() >0  && destDate.length() >0  && destTime.length() >0  && FPrice.length() >0  && PPrice.length() >0  && BPrice.length() >0  && EPrice.length() >0  )  {
                     //   Credentials credentials=new Credentials(editTextUserId.getText().toString(),editTextPassword.getText().toString());
                     com.logarithm.airticket.flightticketbook.ParametersClass.AddFlight credentials = new com.logarithm.airticket.flightticketbook.ParametersClass.AddFlight(name.getText().toString(),flightNo.getText().toString(),flightID.getText().toString(),actv.getText().toString(),actvv.getText().toString(),sourceTime.getText().toString(),destTime.getText().toString(),sourceDate.getText().toString(),destDate.getText().toString(),FPrice.getText().toString(),BPrice.getText().toString(),PPrice.getText().toString(),EPrice.getText().toString());
@@ -199,7 +199,7 @@ public class AddFlight extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.Response> response) {
                             try {
-//                                alertDialog.dismiss();
+                                alertDialog.dismiss();
                                 if (response.body().getSuccess()) {
                                   //  TOKEN_ID=response.body().getToken();
                                     Toast.makeText(AddFlight.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -208,12 +208,12 @@ public class AddFlight extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(AddFlight.this,response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                                //   alertDialog.dismiss();
+                                   alertDialog.dismiss();
 
                             } catch (Exception e) {
                                 Toast.makeText(AddFlight.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                             }
                         }
@@ -221,12 +221,12 @@ public class AddFlight extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Throwable t) {
                             Toast.makeText(AddFlight.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                         }
                     });
                 } else {
-//                    alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Toast.makeText(AddFlight.this, "Fields cannot be blank !", Toast.LENGTH_SHORT).show();
                 }
             }

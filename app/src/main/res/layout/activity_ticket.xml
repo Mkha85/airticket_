@@ -351,7 +351,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:text="VND 0"
+                android:text="000VND 0"
                 android:textColor="#000"
                 android:textSize="22dp"
                 android:textStyle="bold" />

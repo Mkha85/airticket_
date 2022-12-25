@@ -3,6 +3,7 @@ package com.logarithm.airticket.flightticketbook;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> fruits;
 
-    //public AlertDialog alertDialog = null;
+    public AlertDialog alertDialog = null;
     Date date;
     public  static String DATE,CLASS;
     private EditText edittext, edittext2;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        Spinner spinner = (Spinner) findViewById(R.id.spinnerPassengers);
@@ -92,17 +94,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
         logout=findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editor.remove("TOKEN_ID");
-                editor.remove("EMAIL");
-                editor.commit();
-                startActivity(new Intent(getApplicationContext(),RoleChoose.class));
-                finish();
-            }
+                    alertDialog=new AlertDialog.Builder(MainActivity.this).create();
+                    alertDialog.setTitle("Đăng xuất");
+                    alertDialog.setMessage("Bạn có muốn đăng xuất");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int which) {
+                                    dialogInterface.dismiss();
+                                    editor.remove("TOKEN_ID");
+                                    editor.remove("EMAIL");
+                                    editor.commit();
+                                    startActivity(new Intent(getApplicationContext(),RoleChoose.class));
+                                    finish();
+                                }
+                            });
+                    alertDialog.show();
+
+                }
+
         });
+
+
+
 
         list.add(new ItemData_Cusine("1",R.drawable.ic_onewoman));
         list.add(new ItemData_Cusine("2",R.drawable.ic_family));
@@ -117,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         addListenerOnButton();
 
 
-          text_roundtrip = (TextView) findViewById(R.id.text_roundtrip);
+//          text_roundtrip = (TextView) findViewById(R.id.text_roundtrip);
 //        text_oneway = (TextView) findViewById(R.id.text_oneway);
          linear1 = (LinearLayout) findViewById(R.id.linear1);
 //        linear2 = (LinearLayout) findViewById(R.id.linear2);
@@ -127,9 +146,9 @@ public class MainActivity extends AppCompatActivity {
 //        edittext2 = (EditText) findViewById(R.id.txtdata2);
 
         try {
-//            alertDialog = new SpotsDialog(MainActivity.this);
-//            alertDialog.setMessage("Getting Airports info..");
-//            alertDialog.show();
+            alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setMessage("Getting Airports info..");
+            alertDialog.show();
             final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
             Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call2 = apiService.getAllAirports(TOKEN_ID);
             call2.enqueue(new Callback<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport>() {
@@ -137,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
                 public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> response) {
                     try {
-                        //alertDialog.dismiss();
+                        alertDialog.dismiss();
                         Log.i("JSON", response.body().getSuccess().toString());
                         if (response.body().getSuccess()) {
 
@@ -147,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                            //alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                         } else {
                             Log.i("TEST", response.body().getMessage().toString());
@@ -162,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call, Throwable t) {
-                    //alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Toast.makeText(MainActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -181,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
                 line11.setBackgroundColor(Color.parseColor("#000000"));
                 line22.setVisibility(textView.INVISIBLE);
                 line11.setVisibility(textView.VISIBLE);
+
 
             }
         });

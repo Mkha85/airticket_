@@ -26,13 +26,15 @@ import static com.logarithm.airticket.flightticketbook.MainActivity.CLASS;
 import static com.logarithm.airticket.flightticketbook.PassengerDetail.NAME;
 import static com.logarithm.airticket.flightticketbook.PassengerDetail.PRICE;
 
+import java.util.jar.Attributes;
+
 public class TicketActivity extends AppCompatActivity {
 
     private Button btn;
     TextView txtFlightName,txtCountry,txtStationArrived,txtTimeArrived,txtDateArrived,passengerType;
     TextView txtCountryDestination,txtStationDestination,txtTimeDestination,txtDateDestination,passengerName,price;
     RecyclerMessage flight;
-//    AlertDialog alertDialog;
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +58,8 @@ public class TicketActivity extends AppCompatActivity {
 
             txtCountryDestination = findViewById(R.id.txtCountryDestination);
             txtCountryDestination.setText(flight.getDestination());
-
-
             txtStationDestination = findViewById(R.id.txtStationDestination);
-
             txtStationDestination.setText(flight.getDestination());
-
-
             txtTimeDestination = findViewById(R.id.txtTimeDestination);
             txtTimeDestination.setText(flight.getDestTime());
             txtDateDestination = findViewById(R.id.txtDateDestination);
@@ -79,9 +76,9 @@ public class TicketActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-//                    alertDialog = new SpotsDialog(TicketActivity.this);
-//                    alertDialog.setMessage("Booking Flight... ");
-//                    alertDialog.show();
+                    alertDialog = new AlertDialog.Builder(TicketActivity.this).create();
+                    alertDialog.setMessage("Booking Flight... ");
+                    alertDialog.show();
 
                     BookTicket bookTicket=new BookTicket(flight.getSource(),flight.getDestination(),flight.getSourceDate(),flight.getDestDate(),flight.getSourceTime(),flight.getDestTime(),CLASS,EMAIL,NAME,flight.getFlightID(),flight.getFlightNumber(),flight.getName());
 
@@ -91,7 +88,7 @@ public class TicketActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.BookTicket.BookTicket> call, retrofit2.Response<com.logarithm.airticket.flightticketbook.ModelClass.BookTicket.BookTicket> response) {
                                 try {
-                                    //alertDialog.dismiss();
+                                    alertDialog.dismiss();
                                     if (response.body().getStatus()) {
                                         //  TOKEN_ID=response.body().getToken();
                                         Toast.makeText(TicketActivity.this, "Booking Successfull !", Toast.LENGTH_SHORT).show();
@@ -103,12 +100,12 @@ public class TicketActivity extends AppCompatActivity {
                                     } else {
                                         Toast.makeText(TicketActivity.this,"Booking Error", Toast.LENGTH_SHORT).show();
                                     }
-                                    //   alertDialog.dismiss();
+                                       alertDialog.dismiss();
 
                                 } catch (Exception e) {
                                     Toast.makeText(TicketActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                                     e.printStackTrace();
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                                 }
                             }
@@ -116,7 +113,8 @@ public class TicketActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.BookTicket.BookTicket> call, Throwable t) {
                                 Toast.makeText(TicketActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                                //alertDialog.dismiss();
+                                alertDialog.dismiss();
+
 
                             }
                         });

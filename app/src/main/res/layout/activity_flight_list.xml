@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp"
-                    android:text=""
+                    android:text="CDG"
                     android:textColor="#000"
                     android:textSize="19dp"
                     android:textStyle="bold" />

@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
     TextView edt_username,edt_pass,register;
     Button btn_login;
     public static  String EMAIL;
-//    AlertDialog alertDialog;
+    AlertDialog alertDialog;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor ;
@@ -74,9 +74,9 @@ public class Login extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                alertDialog = new SpotsDialog(Login.this);
-//                alertDialog.setMessage("Logging In... ");
-//                alertDialog.show();
+                alertDialog = new AlertDialog.Builder(Login.this).create();
+                alertDialog.setMessage("Logging In... ");
+                alertDialog.show();
 
                 if (edt_pass.getText().length() > 0 && edt_username.getText().length() > 0) {
 
@@ -89,16 +89,16 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.Login> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.Login> response) {
                             try {
-//                                alertDialog.dismiss();
+                                alertDialog.dismiss();
                                 if (response.body().getSuccess()) {
 
                                     TOKEN_ID=response.body().getToken();
                                     editor.putString("TOKEN_ID",TOKEN_ID);
 
 
-//                                    alertDialog = new SpotsDialog(Login.this);
-//                                    alertDialog.setMessage("Getting Profile... ");
-//                                    alertDialog.show();
+                                    alertDialog = new AlertDialog.Builder(Login.this).create();
+                                    alertDialog.setMessage("Getting Profile... ");
+                                    alertDialog.show();
 
                                     final APIInterface apiService1 = APIClient.getClient().create(APIInterface.class);
                                     Call<Profile> call3 = apiService1.getProfile(TOKEN_ID);
@@ -107,20 +107,20 @@ public class Login extends AppCompatActivity {
                                         public void onResponse(Call<Profile> call, Response<Profile> response) {
                                             try {
 
-//                                                    alertDialog.dismiss();
+                                                    alertDialog.dismiss();
                                                     Log.i("TEST EMAIL",response.body().getEmail());
                                                     EMAIL=response.body().getEmail();
                                                     editor.putString("EMAIL",EMAIL);
                                                 editor.commit();
                                                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                                     finish();
-                                                //   alertDialog.dismiss();
+                                                   alertDialog.dismiss();
 
                                             } catch (Exception e) {
-//                                                alertDialog.dismiss();
+                                                alertDialog.dismiss();
                                                 Toast.makeText(Login.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                                                 e.printStackTrace();
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                                             }
                                         }
@@ -129,7 +129,7 @@ public class Login extends AppCompatActivity {
                                         public void onFailure(Call<Profile> call, Throwable t) {
                                             Toast.makeText(Login.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
 
-//                                            alertDialog.dismiss();
+                                            alertDialog.dismiss();
 
                                         }
                                     });
@@ -137,12 +137,12 @@ public class Login extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(Login.this,"Invalid Credentials !", Toast.LENGTH_SHORT).show();
                                 }
-                                //   alertDialog.dismiss();
+                                   alertDialog.dismiss();
 
                             } catch (Exception e) {
                                 Toast.makeText(Login.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                             }
                         }
@@ -151,12 +151,12 @@ public class Login extends AppCompatActivity {
                         public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Login> call, Throwable t) {
                             Toast.makeText(Login.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
 
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                         }
                     });
                 } else {
-//                    alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Toast.makeText(Login.this, "Fields cannot be blank !", Toast.LENGTH_SHORT).show();
                 }
             }

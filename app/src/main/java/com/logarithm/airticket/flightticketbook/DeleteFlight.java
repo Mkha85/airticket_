@@ -27,7 +27,7 @@ import static com.logarithm.airticket.flightticketbook.LoginAdmin.TOKEN_ID_ADMIN
 
 public class DeleteFlight extends AppCompatActivity {
 
-    //public AlertDialog alertDialog = null;
+    public AlertDialog alertDialog = null;
     RecyclerView recyclerView;
     List<Message> tripList;
     //    static View.OnClickListener myOnClickListener;
@@ -50,9 +50,9 @@ public class DeleteFlight extends AppCompatActivity {
                         Log.i("Ds",tripList.get(position).getName());
 
                         try {
-//                            alertDialog = new SpotsDialog(DeleteFlight.this);
-//                            alertDialog.setMessage("Deleting Flight.. ");
-//                            alertDialog.show();
+                            alertDialog = new AlertDialog.Builder(DeleteFlight.this).create();
+                            alertDialog.setMessage("Deleting Flight.. ");
+                            alertDialog.show();
 
                             final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
 
@@ -63,7 +63,7 @@ public class DeleteFlight extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.Response> response) {
                                     try {
-                                        //alertDialog.dismiss();
+                                        alertDialog.dismiss();
                                         if (response.body().getSuccess()) {
                                             Toast.makeText(DeleteFlight.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                             finish();
@@ -72,7 +72,7 @@ public class DeleteFlight extends AppCompatActivity {
                                         }
 
                                     } catch (Exception e) {
-                                        //alertDialog.dismiss();
+                                        alertDialog.dismiss();
                                         Toast.makeText(DeleteFlight.this, "Something Went Wrong-1 ", Toast.LENGTH_SHORT).show();
                                         e.printStackTrace();
 
@@ -81,7 +81,7 @@ public class DeleteFlight extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Throwable t) {
-                                    //alertDialog.dismiss();
+                                    alertDialog.dismiss();
                                     t.printStackTrace();
                                     Toast.makeText(DeleteFlight.this, "Something Went Wrong -2", Toast.LENGTH_SHORT).show();
                                 }
@@ -103,9 +103,9 @@ public class DeleteFlight extends AppCompatActivity {
 
 
         // call the constructor of CustomAdapter to send the reference and data to Adapter
-//        alertDialog = new SpotsDialog(DeleteFlight.this);
-//        alertDialog.setMessage("Getting flights info..");
-//        alertDialog.show();
+        alertDialog = new AlertDialog.Builder(DeleteFlight.this).create();
+        alertDialog.setMessage("Getting flights info..");
+        alertDialog.show();
         final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
         Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteFlight.DeleteFlight> call2 = apiService.getAllflights(TOKEN_ID_ADMIN);
         call2.enqueue(new Callback<com.logarithm.airticket.flightticketbook.ModelClass.DeleteFlight.DeleteFlight>() {
@@ -113,10 +113,10 @@ public class DeleteFlight extends AppCompatActivity {
 
             public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteFlight.DeleteFlight> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.DeleteFlight.DeleteFlight> response) {
                 try {
-                    //alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Log.i("JSON", response.body().getSuccess().toString());
                     if (response.body().getSuccess()) {
-                        //alertDialog.dismiss();
+                        alertDialog.dismiss();
                         tripList = response.body().getMessage();
                         if(tripList.size()==0)
                         {
@@ -130,7 +130,7 @@ public class DeleteFlight extends AppCompatActivity {
                         Log.i("TEST", response.body().getMessage().toString());
                     }
                 } catch (Exception e) {
-                    //alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Toast.makeText(DeleteFlight.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
 
@@ -139,7 +139,7 @@ public class DeleteFlight extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteFlight.DeleteFlight> call, Throwable t) {
-                //alertDialog.dismiss();
+                alertDialog.dismiss();
                 Toast.makeText(DeleteFlight.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
             }
         });

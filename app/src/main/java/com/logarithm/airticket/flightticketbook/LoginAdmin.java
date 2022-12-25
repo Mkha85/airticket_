@@ -31,7 +31,7 @@ public class LoginAdmin extends AppCompatActivity {
     public static String  TOKEN_ID_ADMIN=null;
     TextView edt_username,edt_pass,register;
     Button btn_login;
-//    AlertDialog alertDialog;
+    AlertDialog alertDialog;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor ;
@@ -69,9 +69,9 @@ public class LoginAdmin extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                alertDialog = new SpotsDialog(LoginAdmin.this);
-//                alertDialog.setMessage("Logging In... ");
-//                alertDialog.show();
+                alertDialog = new AlertDialog.Builder(LoginAdmin.this).create();
+                alertDialog.setMessage("Logging In... ");
+                alertDialog.show();
 
                 if (edt_pass.getText().length() > 0 && edt_username.getText().length() > 0) {
 
@@ -83,14 +83,14 @@ public class LoginAdmin extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.Login> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.Login> response) {
                             try {
-//                                alertDialog.dismiss();
+                                alertDialog.dismiss();
                                 if (response.body().getSuccess()) {
                                     TOKEN_ID_ADMIN=response.body().getToken();
                                     editor.putString("TOKEN_ID_ADMIN",TOKEN_ID_ADMIN);
                                     editor.commit();
-//                                    alertDialog = new SpotsDialog(LoginAdmin.this);
-//                                    alertDialog.setMessage("Getting Profile... ");
-//                                    alertDialog.show();
+                                    alertDialog = new AlertDialog.Builder(LoginAdmin.this).create();
+                                    alertDialog.setMessage("Getting Profile... ");
+                                    alertDialog.show();
 
                                     final APIInterface apiService1 = APIClient.getClient().create(APIInterface.class);
                                     Call<Profile> call3 = apiService1.getProfile(TOKEN_ID_ADMIN);
@@ -99,20 +99,20 @@ public class LoginAdmin extends AppCompatActivity {
                                         public void onResponse(Call<Profile> call, Response<Profile> response) {
                                             try {
 
-//                                                alertDialog.dismiss();
+                                                alertDialog.dismiss();
                                                 Login.EMAIL=response.body().getEmail();
 
 
                                                 startActivity(new Intent(getApplicationContext(),AdminDashboard.class));
                                                 finish();
 
-                                                //   alertDialog.dismiss();
+                                                   alertDialog.dismiss();
 
                                             } catch (Exception e) {
-//                                                alertDialog.dismiss();
+                                                alertDialog.dismiss();
                                                 Toast.makeText(LoginAdmin.this, "Something Went Wrong 1", Toast.LENGTH_SHORT).show();
                                                 e.printStackTrace();
-//                                            alertDialog.dismiss();
+                                            alertDialog.dismiss();
 
                                             }
                                         }
@@ -121,7 +121,7 @@ public class LoginAdmin extends AppCompatActivity {
                                         public void onFailure(Call<Profile> call, Throwable t) {
                                             Toast.makeText(LoginAdmin.this, "Something Went Wrong 2", Toast.LENGTH_SHORT).show();
 
-//                                            alertDialog.dismiss();
+                                            alertDialog.dismiss();
 
                                         }
                                     });
@@ -130,12 +130,12 @@ public class LoginAdmin extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(LoginAdmin.this,"Invalid Credentials !", Toast.LENGTH_SHORT).show();
                                 }
-                                //   alertDialog.dismiss();
+                                   alertDialog.dismiss();
 
                             } catch (Exception e) {
                                 Toast.makeText(LoginAdmin.this, "Something Went Wrong 3", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                             }
                         }
@@ -144,12 +144,12 @@ public class LoginAdmin extends AppCompatActivity {
                         public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Login> call, Throwable t) {
                             Toast.makeText(LoginAdmin.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
 
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                         }
                     });
                 } else {
-//                    alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Toast.makeText(LoginAdmin.this, "Fields cannot be blank !", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -1,6 +1,8 @@
 package com.logarithm.airticket.flightticketbook;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.preference.DialogPreference;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,7 +32,8 @@ public class DeleteAirport extends AppCompatActivity {
     //
     //
     //
-    //public AlertDialog alertDialog = null;
+    public AlertDialog alertDialog = null;
+
     RecyclerView recyclerView;
     List<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.Message> tripList2;
     //    static View.OnClickListener myOnClickListener;
@@ -54,9 +57,11 @@ public class DeleteAirport extends AppCompatActivity {
                             Log.i("Ds", tripList2.get(position).getName());
 
                             try {
-//                                alertDialog = new SpotsDialog(DeleteAirport.this);
-//                                alertDialog.setMessage("Deleting Airport.. ");
-//                                alertDialog.show();
+                                alertDialog = new AlertDialog.Builder(DeleteAirport.this).create();
+
+                                alertDialog.setMessage("Deleting Airport.. ");
+
+                                        alertDialog.show();
 
                                 final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
 
@@ -67,7 +72,7 @@ public class DeleteAirport extends AppCompatActivity {
                                     @Override
                                     public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.Response> response) {
                                         try {
-                                            //alertDialog.dismiss();
+                                            alertDialog.dismiss();
                                             if (response.body().getSuccess()) {
                                                 Toast.makeText(DeleteAirport.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                                 finish();
@@ -76,7 +81,7 @@ public class DeleteAirport extends AppCompatActivity {
                                             }
 
                                         } catch (Exception e) {
-                                            //alertDialog.dismiss();
+                                            alertDialog.dismiss();
                                             Toast.makeText(DeleteAirport.this, "Something Went Wrong-1 ", Toast.LENGTH_SHORT).show();
                                             e.printStackTrace();
 
@@ -85,7 +90,7 @@ public class DeleteAirport extends AppCompatActivity {
 
                                     @Override
                                     public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Throwable t) {
-                                        //alertDialog.dismiss();
+                                        alertDialog.dismiss();
                                         t.printStackTrace();
                                         Toast.makeText(DeleteAirport.this, "Something Went Wrong -2", Toast.LENGTH_SHORT).show();
                                     }
@@ -103,9 +108,9 @@ public class DeleteAirport extends AppCompatActivity {
             );
 
             // call the constructor of CustomAdapter to send the reference and data to Adapter
-//            alertDialog = new SpotsDialog(DeleteAirport.this);
-//            alertDialog.setMessage("Getting Airports info..");
-//            alertDialog.show();
+            alertDialog = new AlertDialog.Builder(DeleteAirport.this).create();
+            alertDialog.setMessage("Getting Airports info..");
+            alertDialog.show();
             final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
             Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call2 = apiService.getAllAirports(TOKEN_ID_ADMIN);
             call2.enqueue(new Callback<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport>() {
@@ -113,10 +118,10 @@ public class DeleteAirport extends AppCompatActivity {
 
                 public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> response) {
                     try {
-                        //alertDialog.dismiss();
+                        alertDialog.dismiss();
                         Log.i("JSON", response.body().getSuccess().toString());
                         if (response.body().getSuccess()) {
-                            //alertDialog.dismiss();
+                            alertDialog.dismiss();
                             tripList2 = response.body().getMessage();
                             if (tripList2.size() == 0) {
                                 Toast.makeText(DeleteAirport.this, "No Flights Available !", Toast.LENGTH_SHORT).show();
@@ -129,7 +134,7 @@ public class DeleteAirport extends AppCompatActivity {
                             Log.i("TEST", response.body().getMessage().toString());
                         }
                     } catch (Exception e) {
-                        //alertDialog.dismiss();
+                        alertDialog.dismiss();
                         Toast.makeText(DeleteAirport.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
 
@@ -138,7 +143,7 @@ public class DeleteAirport extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call, Throwable t) {
-                    //alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Toast.makeText(DeleteAirport.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                 }
             });

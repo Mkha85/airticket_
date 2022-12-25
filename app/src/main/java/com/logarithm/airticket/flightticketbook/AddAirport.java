@@ -25,7 +25,7 @@ public class AddAirport extends AppCompatActivity {
 
     TextView name;
     Button addAirport;
-//    AlertDialog alertDialog;
+    AlertDialog alertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +40,9 @@ public class AddAirport extends AppCompatActivity {
         addAirport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                alertDialog = new SpotsDialog(AddAirport.this);
-//                alertDialog.setMessage("Adding Flight... ");
-//                alertDialog.show();
+                alertDialog = new AlertDialog.Builder(AddAirport.this).create();
+                alertDialog.setMessage("Adding Flight... ");
+                alertDialog.show();
                 if (name.getText().length() > 0  )  {
                     final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
 
@@ -52,7 +52,7 @@ public class AddAirport extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.Response> response) {
                             try {
-//                                alertDialog.dismiss();
+                                alertDialog.dismiss();
                                 Log.i("MESSAGE",response.body().getMessage());
                                 if (response.body().getSuccess()) {
 
@@ -62,12 +62,12 @@ public class AddAirport extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(AddAirport.this,response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                                //   alertDialog.dismiss();
+                                   alertDialog.dismiss();
 
                             } catch (Exception e) {
                                 Toast.makeText(AddAirport.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                             }
                         }
@@ -75,12 +75,12 @@ public class AddAirport extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Throwable t) {
                             Toast.makeText(AddAirport.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                         }
                     });
                 } else {
-//                    alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Toast.makeText(AddAirport.this, "Fields cannot be blank !", Toast.LENGTH_SHORT).show();
                 }
             }

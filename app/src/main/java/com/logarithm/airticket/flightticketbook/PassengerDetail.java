@@ -35,6 +35,7 @@ public class PassengerDetail extends AppCompatActivity {
         flight= (RecyclerMessage)getIntent().getSerializableExtra("Flight");
 
         Toast.makeText(this, flight.getName(), Toast.LENGTH_SHORT).show();
+
         email.setText(EMAIL);
         Tclass.setText(CLASS);
         date.setText(DATE);

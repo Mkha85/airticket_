@@ -24,7 +24,7 @@ public class Register extends AppCompatActivity {
     public static String  TOKEN_ID=null;
     TextView edt_username,edt_name,edt_pass;
     Button btn_login;
-    //AlertDialog alertDialog;
+    AlertDialog alertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +39,9 @@ public class Register extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                alertDialog = new SpotsDialog(Register.this);
-//                alertDialog.setMessage("Registering... ");
-//                alertDialog.show();
+                alertDialog = new AlertDialog.Builder(Register.this).create();
+                alertDialog.setMessage("Registering... ");
+                alertDialog.show();
 
                 if (edt_pass.getText().length() > 0 && edt_username.getText().length() > 0) {
 
@@ -54,7 +54,7 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.Register.Register> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.Register.Register> response) {
                             try {
-                                //alertDialog.dismiss();
+                                alertDialog.dismiss();
                                 if (response.body().getSuccess()) {
                                     Toast.makeText(Register.this, "Sucessfully Registered !", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(),Login.class));
@@ -62,12 +62,12 @@ public class Register extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(Register.this,"User already exist !", Toast.LENGTH_SHORT).show();
                                 }
-                                //   alertDialog.dismiss();
+                                   alertDialog.dismiss();
 
                             } catch (Exception e) {
                                 Toast.makeText(Register.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
-//                            alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                             }
                         }
@@ -76,12 +76,12 @@ public class Register extends AppCompatActivity {
                         public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Register.Register> call, Throwable t) {
                             Toast.makeText(Register.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                             t.printStackTrace();
-                            //alertDialog.dismiss();
+                            alertDialog.dismiss();
 
                         }
                     });
                 } else {
-                    //alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Toast.makeText(Register.this, "Fields cannot be blank !", Toast.LENGTH_SHORT).show();
                 }
             }

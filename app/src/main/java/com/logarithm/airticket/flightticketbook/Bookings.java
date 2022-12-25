@@ -29,7 +29,7 @@ import static com.logarithm.airticket.flightticketbook.LoginAdmin.TOKEN_ID_ADMIN
 
 public class Bookings extends AppCompatActivity {
 
-    //public AlertDialog alertDialog = null;
+    public AlertDialog alertDialog = null;
     RecyclerView recyclerView;
     List<Message> tripList;
     @Override
@@ -70,9 +70,9 @@ public class Bookings extends AppCompatActivity {
 
 
                             try {
-                                //alertDialog = new SpotsDialog(Bookings.this);
-                                //alertDialog.setMessage("Deleting Booking.. ");
-                                //alertDialog.show();
+                                alertDialog = new AlertDialog.Builder(Bookings.this).show();
+                                alertDialog.setMessage("Deleting Booking.. ");
+                                alertDialog.show();
                                 final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
                                 DeleteBooking deleteBooking=new DeleteBooking(tripList.get(position).getId());
                                 Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call2 = apiService.deleteBooking(TOKEN_ID_ADMIN, deleteBooking);
@@ -80,7 +80,7 @@ public class Bookings extends AppCompatActivity {
                                     @Override
                                     public void onResponse(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Response<com.logarithm.airticket.flightticketbook.ModelClass.Response> response) {
                                         try {
-                                            //alertDialog.dismiss();
+                                            alertDialog.dismiss();
                                             if (response.body().getSuccess()) {
                                                 Toast.makeText(Bookings.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                                 finish();
@@ -89,7 +89,7 @@ public class Bookings extends AppCompatActivity {
                                             }
 
                                         } catch (Exception e) {
-                                            //alertDialog.dismiss();
+                                            alertDialog.dismiss();
                                             Toast.makeText(Bookings.this, "Something Went Wrong-1 ", Toast.LENGTH_SHORT).show();
                                             e.printStackTrace();
 
@@ -98,7 +98,7 @@ public class Bookings extends AppCompatActivity {
 
                                     @Override
                                     public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Throwable t) {
-                                        //alertDialog.dismiss();
+                                        alertDialog.dismiss();
                                         t.printStackTrace();
                                         Toast.makeText(Bookings.this, "Something Went Wrong -2", Toast.LENGTH_SHORT).show();
                                     }
@@ -135,9 +135,9 @@ public class Bookings extends AppCompatActivity {
 
 
             // call the constructor of CustomAdapter to send the reference and data to Adapter
-//            alertDialog = new SpotsDialog(Bookings.this);
-//            alertDialog.setMessage("Getting flights info..");
-//            alertDialog.show();
+            alertDialog = new AlertDialog.Builder(Bookings.this).show();
+            alertDialog.setMessage("Getting flights info..");
+            alertDialog.show();
             final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
             Call<ViewBooking> call2 = apiService.viewBookings(TOKEN_ID);
             call2.enqueue(new Callback<ViewBooking>() {
@@ -145,9 +145,9 @@ public class Bookings extends AppCompatActivity {
 
                 public void onResponse(Call<ViewBooking> call, Response<ViewBooking> response) {
                     try {
-                        //alertDialog.dismiss();
+                        alertDialog.dismiss();
                         if (response.body().getSuccess()) {
-                            //alertDialog.dismiss();
+                            alertDialog.dismiss();
                             tripList = response.body().getMessage();
                             if (tripList.size() == 0) {
                                 Toast.makeText(Bookings.this, "No bookings Available !", Toast.LENGTH_SHORT).show();
@@ -160,7 +160,7 @@ public class Bookings extends AppCompatActivity {
                             Log.i("TEST", response.body().getMessage().toString());
                         }
                     } catch (Exception e) {
-                        //alertDialog.dismiss();
+                        alertDialog.dismiss();
                         Toast.makeText(Bookings.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
 
@@ -169,7 +169,7 @@ public class Bookings extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ViewBooking> call, Throwable t) {
-                    //alertDialog.dismiss();
+                    alertDialog.dismiss();
                     Toast.makeText(Bookings.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                 }
             });

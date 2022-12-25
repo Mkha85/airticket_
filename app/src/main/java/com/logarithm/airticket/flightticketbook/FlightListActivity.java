@@ -41,7 +41,7 @@ public class FlightListActivity extends AppCompatActivity {
 
 
     public String Source,Destination;
-    //public AlertDialog alertDialog = null;
+    public AlertDialog alertDialog = null;
     List<RecyclerMessage> tripList;
 
     TextView SourceToolbar,DestinationToolbar;
@@ -56,15 +56,15 @@ public class FlightListActivity extends AppCompatActivity {
         Source=getIntent().getStringExtra("FROM");
         Destination=getIntent().getStringExtra("TO");
         SourceToolbar=findViewById(R.id.SourceToolbar);
-        DestinationToolbar=findViewById(R.id.DestinationToolbar);
         SourceToolbar.setText(Source);
+        DestinationToolbar=findViewById(R.id.DestinationToolbar);
         DestinationToolbar.setText(Destination);
 
         try {
             // call the constructor of CustomAdapter to send the reference and data to Adapter
-//            alertDialog = new SpotsDialog(FlightListActivity.this);
-//            alertDialog.setMessage("Getting flights info..");
-//            alertDialog.show();
+            alertDialog = new AlertDialog.Builder(FlightListActivity.this).create();
+            alertDialog.setMessage("Getting flights info..");
+            alertDialog.show();
             final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
             GetSpecFlight getSpecFlight=new GetSpecFlight(Source,Destination);
             Call<RecyclerGet> call2 = apiService.getAllSpecflights(TOKEN_ID,getSpecFlight);
@@ -72,10 +72,10 @@ public class FlightListActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<RecyclerGet> call, Response<RecyclerGet> response) {
                     try {
-                        //alertDialog.dismiss();
+                        alertDialog.dismiss();
                         Log.i("JSON", response.body().getSuccess().toString());
                         if (response.body().getSuccess()) {
-                            //alertDialog.dismiss();
+                            alertDialog.dismiss();
                             tripList = response.body().getMessage();
                             if (tripList.size() == 0) {
                                 Toast.makeText(FlightListActivity.this, "No Flights Available !", Toast.LENGTH_SHORT).show();
@@ -106,14 +106,14 @@ public class FlightListActivity extends AppCompatActivity {
                             Log.i("TEST", response.body().getMessage().toString());
                         }
                     } catch (Exception e) {
-                        //alertDialog.dismiss();
+                        alertDialog.dismiss();
                         Toast.makeText(FlightListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 }
                 @Override
                 public void onFailure(Call<RecyclerGet> call, Throwable t) {
-                    //alertDialog.dismiss();
+                    alertDialog.dismiss();
                     t.printStackTrace();
                     Toast.makeText(FlightListActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
          //           Toast.makeText(FlightListActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();

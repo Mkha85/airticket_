@@ -16,7 +16,7 @@ import java.util.List;
 public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.MyViewHolder> {
 
     List<Message> tripList;
-    //AlertDialog alertDialog = null;
+    AlertDialog alertDialog = null;
     Context context;
     public FlightAdapter(Context context, List<com.logarithm.airticket.flightticketbook.ModelClass.DeleteFlight.Message> tripList) {
         this.context = context;

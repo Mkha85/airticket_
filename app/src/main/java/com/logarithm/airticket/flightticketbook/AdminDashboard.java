@@ -1,6 +1,8 @@
 package com.logarithm.airticket.flightticketbook;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +15,7 @@ import com.logarithm.airticket.flightticketbook.R;
 
 public class AdminDashboard extends AppCompatActivity {
 
-
+    public AlertDialog alertDialog = null;
     SharedPreferences pref;
     SharedPreferences.Editor editor ;
 
@@ -24,6 +26,7 @@ public class AdminDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
+
         logout=findViewById(R.id.logout);
 
 
@@ -48,12 +51,24 @@ public class AdminDashboard extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editor.remove("TOKEN_ID_ADMIN");
-                editor.commit();
-                startActivity(new Intent(getApplicationContext(),RoleChoose.class));
-                finish();
+                alertDialog=new AlertDialog.Builder(AdminDashboard.this).create();
+                alertDialog.setTitle("Đăng xuất");
+                alertDialog.setMessage("Bạn có muốn đăng xuất");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                dialogInterface.dismiss();
+                                editor.remove("TOKEN_ID_ADMIN");
+                                editor.commit();
+                                startActivity(new Intent(getApplicationContext(),RoleChoose.class));
+                                finish();
+                            }
+                        });
+                alertDialog.show();
 
             }
+
         });
 
         addFlight.setOnClickListener(new View.OnClickListener() {
