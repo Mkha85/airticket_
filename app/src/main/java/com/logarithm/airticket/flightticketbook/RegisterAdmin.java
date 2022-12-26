@@ -40,14 +40,11 @@ public class RegisterAdmin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alertDialog = new AlertDialog.Builder(RegisterAdmin.this).create();
-                alertDialog.setMessage("Registering... ");
+                alertDialog.setMessage("Đang đăng ký... ");
                 alertDialog.show();
 
                 if (edt_pass.getText().length() > 0 && edt_username.getText().length() > 0) {
-
-                    //   Credentials credentials=new Credentials(editTextUserId.getText().toString(),editTextPassword.getText().toString());
                     com.logarithm.airticket.flightticketbook.ParametersClass.Register credentials = new com.logarithm.airticket.flightticketbook.ParametersClass.Register(edt_username.getText().toString(), edt_pass.getText().toString(),edt_name.getText().toString());
-
                     final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
                     Call<com.logarithm.airticket.flightticketbook.ModelClass.Register.Register> call2 = apiService.registerAdmin(credentials);
                     call2.enqueue(new Callback<com.logarithm.airticket.flightticketbook.ModelClass.Register.Register>() {
@@ -56,16 +53,16 @@ public class RegisterAdmin extends AppCompatActivity {
                             try {
                                 alertDialog.dismiss();
                                 if (response.body().getSuccess()) {
-                                    Toast.makeText(RegisterAdmin.this, "Sucessfully Registered !", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterAdmin.this, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(),LoginAdmin.class));
                                     finish();
                                 } else {
-                                    Toast.makeText(RegisterAdmin.this,"Admin already exist !", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterAdmin.this,"Admin đã tồn tại !", Toast.LENGTH_SHORT).show();
                                 }
                                    alertDialog.dismiss();
 
                             } catch (Exception e) {
-                                Toast.makeText(RegisterAdmin.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterAdmin.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             alertDialog.dismiss();
 
@@ -74,7 +71,7 @@ public class RegisterAdmin extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Register.Register> call, Throwable t) {
-                            Toast.makeText(RegisterAdmin.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterAdmin.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
 
                             alertDialog.dismiss();
 
@@ -82,7 +79,7 @@ public class RegisterAdmin extends AppCompatActivity {
                     });
                 } else {
                     alertDialog.dismiss();
-                    Toast.makeText(RegisterAdmin.this, "Fields cannot be blank !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterAdmin.this, "Không được để trống !", Toast.LENGTH_SHORT).show();
                 }
             }
         });

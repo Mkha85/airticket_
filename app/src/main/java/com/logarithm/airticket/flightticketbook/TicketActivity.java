@@ -77,7 +77,7 @@ public class TicketActivity extends AppCompatActivity {
                 public void onClick(View view) {
 
                     alertDialog = new AlertDialog.Builder(TicketActivity.this).create();
-                    alertDialog.setMessage("Booking Flight... ");
+                    alertDialog.setMessage("Đang đặt chuyến bay... ");
                     alertDialog.show();
 
                     BookTicket bookTicket=new BookTicket(flight.getSource(),flight.getDestination(),flight.getSourceDate(),flight.getDestDate(),flight.getSourceTime(),flight.getDestTime(),CLASS,EMAIL,NAME,flight.getFlightID(),flight.getFlightNumber(),flight.getName());
@@ -91,19 +91,19 @@ public class TicketActivity extends AppCompatActivity {
                                     alertDialog.dismiss();
                                     if (response.body().getStatus()) {
                                         //  TOKEN_ID=response.body().getToken();
-                                        Toast.makeText(TicketActivity.this, "Booking Successfull !", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(TicketActivity.this, "Đặt thành công !", Toast.LENGTH_SHORT).show();
 
                                         Intent intent = new Intent(TicketActivity.this, ConfirmTicketActivity.class);
                                         intent.putExtra("Flight",response.body().getPayload());
                                         startActivity(intent);
                                         finish();
                                     } else {
-                                        Toast.makeText(TicketActivity.this,"Booking Error", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(TicketActivity.this,"Đặt thất bại", Toast.LENGTH_SHORT).show();
                                     }
                                        alertDialog.dismiss();
 
                                 } catch (Exception e) {
-                                    Toast.makeText(TicketActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TicketActivity.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                                     e.printStackTrace();
                             alertDialog.dismiss();
 
@@ -112,7 +112,7 @@ public class TicketActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.BookTicket.BookTicket> call, Throwable t) {
-                                Toast.makeText(TicketActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(TicketActivity.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                                 alertDialog.dismiss();
 
 

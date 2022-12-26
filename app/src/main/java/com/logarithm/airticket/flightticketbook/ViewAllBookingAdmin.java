@@ -49,7 +49,7 @@ public class ViewAllBookingAdmin extends AppCompatActivity {
 
                             try {
                                 alertDialog = new AlertDialog.Builder(ViewAllBookingAdmin.this).create();
-                                alertDialog.setMessage("Deleting Booking.. ");
+                                alertDialog.setMessage("Xóa vé đặt.. ");
                                 alertDialog.show();
                                 final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
                                 DeleteBooking deleteBooking=new DeleteBooking(tripList.get(position).getId());
@@ -68,7 +68,7 @@ public class ViewAllBookingAdmin extends AppCompatActivity {
 
                                         } catch (Exception e) {
                                             alertDialog.dismiss();
-                                            Toast.makeText(ViewAllBookingAdmin.this, "Something Went Wrong-1 ", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ViewAllBookingAdmin.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                                             e.printStackTrace();
 
                                         }
@@ -78,7 +78,7 @@ public class ViewAllBookingAdmin extends AppCompatActivity {
                                     public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Throwable t) {
                                         alertDialog.dismiss();
                                         t.printStackTrace();
-                                        Toast.makeText(ViewAllBookingAdmin.this, "Something Went Wrong -2", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ViewAllBookingAdmin.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                                     }
 
 
@@ -106,12 +106,12 @@ public class ViewAllBookingAdmin extends AppCompatActivity {
 
                 public void onResponse(Call<ViewBooking> call, Response<ViewBooking> response) {
                     try {
-                        alertDialog.dismiss();
+//                        alertDialog.dismiss();
                         if (response.body().getSuccess()) {
-                            alertDialog.dismiss();
+//                            alertDialog.dismiss();
                             tripList = response.body().getMessage();
                             if (tripList.size() == 0) {
-                                Toast.makeText(ViewAllBookingAdmin.this, "No bookings Available !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ViewAllBookingAdmin.this, "Không có vé nào !", Toast.LENGTH_SHORT).show();
                             }
                             ViewBookingAdapter customAdapter = new ViewBookingAdapter(ViewAllBookingAdmin.this, response.body().getMessage());
                             recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
@@ -121,8 +121,8 @@ public class ViewAllBookingAdmin extends AppCompatActivity {
                             Log.i("TEST", response.body().getMessage().toString());
                         }
                     } catch (Exception e) {
-                        alertDialog.dismiss();
-                        Toast.makeText(ViewAllBookingAdmin.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+//                        alertDialog.dismiss();
+                        Toast.makeText(ViewAllBookingAdmin.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
 
                     }
@@ -131,7 +131,7 @@ public class ViewAllBookingAdmin extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<ViewBooking> call, Throwable t) {
                     alertDialog.dismiss();
-                    Toast.makeText(ViewAllBookingAdmin.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewAllBookingAdmin.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                 }
             });
 

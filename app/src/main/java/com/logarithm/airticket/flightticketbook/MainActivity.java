@@ -126,28 +126,15 @@ public class MainActivity extends AppCompatActivity {
         list.add(new ItemData_Cusine("1",R.drawable.ic_onewoman));
         list.add(new ItemData_Cusine("2",R.drawable.ic_family));
         list.add(new ItemData_Cusine("3",R.drawable.ic_threepersons));
-//        sp = (Spinner) findViewById(R.id.spinnerPassengers);
-//        Spinner_Cusine_DataAdapter adapter = new Spinner_Cusine_DataAdapter(MainActivity.this, list);
-//        sp.setAdapter(adapter);
-//        spinner.setAdapter(adapter);
-
-
         addItemsOnSpinner2();
         addListenerOnButton();
-
-
-//          text_roundtrip = (TextView) findViewById(R.id.text_roundtrip);
-//        text_oneway = (TextView) findViewById(R.id.text_oneway);
-         linear1 = (LinearLayout) findViewById(R.id.linear1);
-//        linear2 = (LinearLayout) findViewById(R.id.linear2);
-         line11 = (LinearLayout) findViewById(R.id.line11);
-//        line22 = (LinearLayout) findViewById(R.id.line22);
-          edittext = (EditText) findViewById(R.id.txtdata);
-//        edittext2 = (EditText) findViewById(R.id.txtdata2);
+        linear1 = (LinearLayout) findViewById(R.id.linear1);
+        line11 = (LinearLayout) findViewById(R.id.line11);
+        edittext = (EditText) findViewById(R.id.txtdata);
 
         try {
             alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-            alertDialog.setMessage("Getting Airports info..");
+            alertDialog.setMessage("Lấy thông tin sân bay...");
             alertDialog.show();
             final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
             Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call2 = apiService.getAllAirports(TOKEN_ID);
@@ -173,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                         //alertDialog.dismiss();
-                        Toast.makeText(MainActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
 
                     }
@@ -182,13 +169,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call, Throwable t) {
                     alertDialog.dismiss();
-                    Toast.makeText(MainActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                 }
             });
         }catch (Exception e)
         {
             e.printStackTrace();
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Có lỗi!", Toast.LENGTH_SHORT).show();
         }
 
         linear1.setOnClickListener(new View.OnClickListener() {
@@ -204,22 +191,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-//        linear2.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        text_roundtrip.setTextColor(Color.parseColor("#837a7a"));
-//                        text_oneway.setTextColor(Color.parseColor("#000000"));
-//                        line22.setBackgroundColor(Color.parseColor("#000000"));
-//                        line11.setVisibility(textView.INVISIBLE);
-//                        line22.setVisibility(textView.VISIBLE);
-//
-//                    }
-//                }
-//        );
-
-
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -244,8 +215,6 @@ public class MainActivity extends AppCompatActivity {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
-
         final DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -258,32 +227,19 @@ public class MainActivity extends AppCompatActivity {
                 updateLabelone();
             }
         };
-//        edittext2.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // TODO Auto-generated method stub
-//                new DatePickerDialog(MainActivity.this, date2, myCalendar2
-//                        .get(Calendar.YEAR), myCalendar2.get(Calendar.MONTH),
-//                        myCalendar2.get(Calendar.DAY_OF_MONTH)).show();
-//            }
-//        });
-
-
     }
     private void updateLabel() {
         String myFormat = "MMM dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
 
         edittext.setText(sdf.format(myCalendar.getTime()));
-        //edittext2.setText(sdf.format(myCalendar2.getTime()));
-    }
 
+    }
     private void updateLabelone() {
         String myFormat = "MMM dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
 
-        //edittext.setText(sdf.format(myCalendar.getTime()));
+
         edittext2.setText(sdf.format(myCalendar2.getTime()));
     }
 
@@ -309,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
 
     // get the selected dropdown list value
     public void addListenerOnButton() {
-//        spinner1 = (Spinner) findViewById(R.id.spinnerPassengers);
+
         spinner2 = (Spinner) findViewById(R.id.spinnerClass);
 
         img = (ImageView) findViewById(R.id.btn1);

@@ -43,35 +43,13 @@ public class Bookings extends AppCompatActivity {
             // set a LinearLayoutManager with default vertical orientaion
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
             recyclerView.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerVie
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             recyclerView.addOnItemTouchListener(
                     new MyRecyclerItemClickListener(getApplicationContext(), new MyRecyclerItemClickListener.OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, final int position) {
-
-
                             try {
                                 alertDialog = new AlertDialog.Builder(Bookings.this).show();
-                                alertDialog.setMessage("Deleting Booking.. ");
+                                alertDialog.setMessage("Xóa đặt chuyến.. ");
                                 alertDialog.show();
                                 final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
                                 DeleteBooking deleteBooking=new DeleteBooking(tripList.get(position).getId());
@@ -90,7 +68,7 @@ public class Bookings extends AppCompatActivity {
 
                                         } catch (Exception e) {
                                             alertDialog.dismiss();
-                                            Toast.makeText(Bookings.this, "Something Went Wrong-1 ", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Bookings.this, "Có lỗi! ", Toast.LENGTH_SHORT).show();
                                             e.printStackTrace();
 
                                         }
@@ -100,7 +78,7 @@ public class Bookings extends AppCompatActivity {
                                     public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Throwable t) {
                                         alertDialog.dismiss();
                                         t.printStackTrace();
-                                        Toast.makeText(Bookings.this, "Something Went Wrong -2", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Bookings.this, "Có lỗi! ", Toast.LENGTH_SHORT).show();
                                     }
 
 
@@ -161,7 +139,7 @@ public class Bookings extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                         alertDialog.dismiss();
-                        Toast.makeText(Bookings.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Bookings.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
 
                     }
@@ -170,7 +148,7 @@ public class Bookings extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<ViewBooking> call, Throwable t) {
                     alertDialog.dismiss();
-                    Toast.makeText(Bookings.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Bookings.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                 }
             });
 

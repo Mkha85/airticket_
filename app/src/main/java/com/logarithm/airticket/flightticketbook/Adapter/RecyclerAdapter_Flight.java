@@ -22,9 +22,7 @@ import com.logarithm.airticket.flightticketbook.R;
 
 import java.util.List;
 
-/**
- * Created by KURPC on 05-02-2018.
- */
+
 
 public class RecyclerAdapter_Flight extends RecyclerView.Adapter<RecyclerAdapter_Flight.MyViewHolder> {
 
@@ -34,7 +32,7 @@ public class RecyclerAdapter_Flight extends RecyclerView.Adapter<RecyclerAdapter
     boolean showingFirst = true;
 
 
-    private List<RecyclerMessage> moviesList;
+    private List<RecyclerMessage> flightsList;
     Context mContext;
 
     ImageView NormalImageView;
@@ -73,8 +71,8 @@ public class RecyclerAdapter_Flight extends RecyclerView.Adapter<RecyclerAdapter
 
 
 
-    public RecyclerAdapter_Flight(Context mContext, List<RecyclerMessage> moviesList) {
-        this.moviesList = moviesList;
+    public RecyclerAdapter_Flight(Context mContext, List<RecyclerMessage> flightsList) {
+        this.flightsList = flightsList;
         this.mContext = mContext;
     }
 
@@ -92,18 +90,18 @@ public class RecyclerAdapter_Flight extends RecyclerView.Adapter<RecyclerAdapter
     public void onBindViewHolder(final MyViewHolder holder, final int position)
     {
 
-        RecyclerMessage movie = moviesList.get(position);
-        holder.txtFlightName.setText(movie.getName());
-        holder.txtCountry.setText(movie.getSource());
-        holder.txtStationArrived.setText(movie.getDestination());
-        holder.txtCountryDestination.setText(movie.getDestination());
-        holder.txtStationDestination.setText(movie.getDestination());
-        holder.btnBuy.setText("Book this Trip");
+        RecyclerMessage flight = flightsList.get(position);
+        holder.txtFlightName.setText(flight.getName());
+        holder.txtCountry.setText(flight.getSource());
+        holder.txtStationArrived.setText(flight.getSource());
+        holder.txtCountryDestination.setText(flight.getDestination());
+        holder.txtStationDestination.setText(flight.getDestination());
+        holder.btnBuy.setText("Đặt vé này");
         holder.imgPlane.setImageResource(R.drawable.ic_blackplane);
-        holder.txtDateArrived.setText(movie.getSourceDate());
-        holder.txtDateDestination.setText(movie.getDestDate());
-        holder.txtTimeArrived.setText(movie.getSourceTime());
-        holder.txtTimeDestination.setText(movie.getDestTime());
+        holder.txtDateArrived.setText(flight.getSourceDate());
+        holder.txtDateDestination.setText(flight.getDestDate());
+        holder.txtTimeArrived.setText(flight.getSourceTime());
+        holder.txtTimeDestination.setText(flight.getDestTime());
 
 
         holder.btnBuy.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +109,7 @@ public class RecyclerAdapter_Flight extends RecyclerView.Adapter<RecyclerAdapter
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PassengerDetail.class);
 
-                intent.putExtra("Flight",moviesList.get(position));
+                intent.putExtra("Flight",flightsList.get(position));
 
                 mContext.startActivity(intent);
 
@@ -123,7 +121,7 @@ public class RecyclerAdapter_Flight extends RecyclerView.Adapter<RecyclerAdapter
 
     @Override
     public int getItemCount() {
-        return moviesList.size();
+        return flightsList.size();
     }
 
 

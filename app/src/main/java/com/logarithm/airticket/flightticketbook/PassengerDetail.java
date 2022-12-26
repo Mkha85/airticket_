@@ -35,7 +35,7 @@ public class PassengerDetail extends AppCompatActivity {
         flight= (RecyclerMessage)getIntent().getSerializableExtra("Flight");
 
         Toast.makeText(this, flight.getName(), Toast.LENGTH_SHORT).show();
-
+        name.setText(NAME);
         email.setText(EMAIL);
         Tclass.setText(CLASS);
         date.setText(DATE);
@@ -71,7 +71,7 @@ public class PassengerDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (name.getText().length() < 0) {
-                    Toast.makeText(PassengerDetail.this, "Fields cannot be blank !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PassengerDetail.this, "Không được để trống !", Toast.LENGTH_SHORT).show();
                 } else {
 
                     Intent intent=new Intent(getApplicationContext(),TicketActivity.class);

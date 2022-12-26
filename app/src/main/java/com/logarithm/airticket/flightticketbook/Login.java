@@ -75,7 +75,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alertDialog = new AlertDialog.Builder(Login.this).create();
-                alertDialog.setMessage("Logging In... ");
+                alertDialog.setMessage("Đang đăng nhập... ");
                 alertDialog.show();
 
                 if (edt_pass.getText().length() > 0 && edt_username.getText().length() > 0) {
@@ -97,7 +97,7 @@ public class Login extends AppCompatActivity {
 
 
                                     alertDialog = new AlertDialog.Builder(Login.this).create();
-                                    alertDialog.setMessage("Getting Profile... ");
+                                    alertDialog.setMessage("Đang lấy thông tin cá nhân... ");
                                     alertDialog.show();
 
                                     final APIInterface apiService1 = APIClient.getClient().create(APIInterface.class);
@@ -118,7 +118,7 @@ public class Login extends AppCompatActivity {
 
                                             } catch (Exception e) {
                                                 alertDialog.dismiss();
-                                                Toast.makeText(Login.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Login.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                                                 e.printStackTrace();
                             alertDialog.dismiss();
 
@@ -127,7 +127,7 @@ public class Login extends AppCompatActivity {
 
                                         @Override
                                         public void onFailure(Call<Profile> call, Throwable t) {
-                                            Toast.makeText(Login.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Login.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
 
                                             alertDialog.dismiss();
 
@@ -135,12 +135,12 @@ public class Login extends AppCompatActivity {
                                     });
 
                                 } else {
-                                    Toast.makeText(Login.this,"Invalid Credentials !", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this,"Sai thông tin đăng nhâp !", Toast.LENGTH_SHORT).show();
                                 }
                                    alertDialog.dismiss();
 
                             } catch (Exception e) {
-                                Toast.makeText(Login.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             alertDialog.dismiss();
 
@@ -149,7 +149,7 @@ public class Login extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Login> call, Throwable t) {
-                            Toast.makeText(Login.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
 
                             alertDialog.dismiss();
 
@@ -157,7 +157,7 @@ public class Login extends AppCompatActivity {
                     });
                 } else {
                     alertDialog.dismiss();
-                    Toast.makeText(Login.this, "Fields cannot be blank !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "không được để trống !", Toast.LENGTH_SHORT).show();
                 }
             }
         });

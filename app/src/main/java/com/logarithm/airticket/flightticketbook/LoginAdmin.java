@@ -70,12 +70,12 @@ public class LoginAdmin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alertDialog = new AlertDialog.Builder(LoginAdmin.this).create();
-                alertDialog.setMessage("Logging In... ");
+                alertDialog.setMessage("Đang đăng nhập... ");
                 alertDialog.show();
 
                 if (edt_pass.getText().length() > 0 && edt_username.getText().length() > 0) {
 
-                    //   Credentials credentials=new Credentials(editTextUserId.getText().toString(),editTextPassword.getText().toString());
+                    
                     Credentials credentials = new Credentials(edt_username.getText().toString(), edt_pass.getText().toString());
                     final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
                     Call<com.logarithm.airticket.flightticketbook.ModelClass.Login> call2 = apiService.loginAdmin(credentials);
@@ -110,7 +110,7 @@ public class LoginAdmin extends AppCompatActivity {
 
                                             } catch (Exception e) {
                                                 alertDialog.dismiss();
-                                                Toast.makeText(LoginAdmin.this, "Something Went Wrong 1", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(LoginAdmin.this, "Có lỗi! ", Toast.LENGTH_SHORT).show();
                                                 e.printStackTrace();
                                             alertDialog.dismiss();
 
@@ -119,7 +119,7 @@ public class LoginAdmin extends AppCompatActivity {
 
                                         @Override
                                         public void onFailure(Call<Profile> call, Throwable t) {
-                                            Toast.makeText(LoginAdmin.this, "Something Went Wrong 2", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginAdmin.this, "Có lỗi! ", Toast.LENGTH_SHORT).show();
 
                                             alertDialog.dismiss();
 
@@ -128,12 +128,12 @@ public class LoginAdmin extends AppCompatActivity {
                                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                     finish();
                                 } else {
-                                    Toast.makeText(LoginAdmin.this,"Invalid Credentials !", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginAdmin.this,"Sai thông tin đăng nhập !", Toast.LENGTH_SHORT).show();
                                 }
                                    alertDialog.dismiss();
 
                             } catch (Exception e) {
-                                Toast.makeText(LoginAdmin.this, "Something Went Wrong 3", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginAdmin.this, "Có lỗi! ", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             alertDialog.dismiss();
 
@@ -142,7 +142,7 @@ public class LoginAdmin extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Login> call, Throwable t) {
-                            Toast.makeText(LoginAdmin.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginAdmin.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
 
                             alertDialog.dismiss();
 
@@ -150,7 +150,7 @@ public class LoginAdmin extends AppCompatActivity {
                     });
                 } else {
                     alertDialog.dismiss();
-                    Toast.makeText(LoginAdmin.this, "Fields cannot be blank !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginAdmin.this, "không được để trống !", Toast.LENGTH_SHORT).show();
                 }
             }
         });

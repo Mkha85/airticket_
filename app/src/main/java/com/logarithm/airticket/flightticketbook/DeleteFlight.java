@@ -51,7 +51,7 @@ public class DeleteFlight extends AppCompatActivity {
 
                         try {
                             alertDialog = new AlertDialog.Builder(DeleteFlight.this).create();
-                            alertDialog.setMessage("Deleting Flight.. ");
+                            alertDialog.setMessage("Xóa chuyến bay.. ");
                             alertDialog.show();
 
                             final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
@@ -73,7 +73,7 @@ public class DeleteFlight extends AppCompatActivity {
 
                                     } catch (Exception e) {
                                         alertDialog.dismiss();
-                                        Toast.makeText(DeleteFlight.this, "Something Went Wrong-1 ", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(DeleteFlight.this, "Có lỗi! ", Toast.LENGTH_SHORT).show();
                                         e.printStackTrace();
 
                                     }
@@ -83,7 +83,7 @@ public class DeleteFlight extends AppCompatActivity {
                                 public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Throwable t) {
                                     alertDialog.dismiss();
                                     t.printStackTrace();
-                                    Toast.makeText(DeleteFlight.this, "Something Went Wrong -2", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(DeleteFlight.this, "Có lỗi! ", Toast.LENGTH_SHORT).show();
                                 }
 
 
@@ -104,7 +104,7 @@ public class DeleteFlight extends AppCompatActivity {
 
         // call the constructor of CustomAdapter to send the reference and data to Adapter
         alertDialog = new AlertDialog.Builder(DeleteFlight.this).create();
-        alertDialog.setMessage("Getting flights info..");
+        alertDialog.setMessage("Lấy thông tin sân bay...");
         alertDialog.show();
         final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
         Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteFlight.DeleteFlight> call2 = apiService.getAllflights(TOKEN_ID_ADMIN);
@@ -120,7 +120,7 @@ public class DeleteFlight extends AppCompatActivity {
                         tripList = response.body().getMessage();
                         if(tripList.size()==0)
                         {
-                            Toast.makeText(DeleteFlight.this, "No Flights Available !", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DeleteFlight.this, "không có chuyến bay có sẵn !", Toast.LENGTH_SHORT).show();
                         }
                         FlightAdapter customAdapter = new FlightAdapter(DeleteFlight.this, response.body().getMessage());
                         recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
@@ -131,7 +131,7 @@ public class DeleteFlight extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     alertDialog.dismiss();
-                    Toast.makeText(DeleteFlight.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeleteFlight.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
 
                 }
@@ -140,7 +140,7 @@ public class DeleteFlight extends AppCompatActivity {
             @Override
             public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteFlight.DeleteFlight> call, Throwable t) {
                 alertDialog.dismiss();
-                Toast.makeText(DeleteFlight.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DeleteFlight.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
             }
         });
 

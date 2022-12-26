@@ -46,9 +46,7 @@ public class ConfirmTicketActivity extends AppCompatActivity {
             txtStationDestination.setText(Flight.getTo());
             passengerName = findViewById(R.id.passengerName);
             passengerName.setText(NAME);
-//            Toast.makeText(this, Flight.getFlicketName(), Toast.LENGTH_SHORT).show();
-//            Toast.makeText(this, Flight.getId(), Toast.LENGTH_SHORT).show();
-//            Toast.makeText(this, Flight.getFlicketName(), Toast.LENGTH_SHORT).show();
+
 
         }catch (Exception e)
         {

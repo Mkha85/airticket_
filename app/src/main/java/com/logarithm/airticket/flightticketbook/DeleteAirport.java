@@ -59,7 +59,7 @@ public class DeleteAirport extends AppCompatActivity {
                             try {
                                 alertDialog = new AlertDialog.Builder(DeleteAirport.this).create();
 
-                                alertDialog.setMessage("Deleting Airport.. ");
+                                alertDialog.setMessage("Xóa sân bay.. ");
 
                                         alertDialog.show();
 
@@ -82,7 +82,7 @@ public class DeleteAirport extends AppCompatActivity {
 
                                         } catch (Exception e) {
                                             alertDialog.dismiss();
-                                            Toast.makeText(DeleteAirport.this, "Something Went Wrong-1 ", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(DeleteAirport.this, "Có lỗi! ", Toast.LENGTH_SHORT).show();
                                             e.printStackTrace();
 
                                         }
@@ -92,7 +92,7 @@ public class DeleteAirport extends AppCompatActivity {
                                     public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Response> call, Throwable t) {
                                         alertDialog.dismiss();
                                         t.printStackTrace();
-                                        Toast.makeText(DeleteAirport.this, "Something Went Wrong -2", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(DeleteAirport.this, "Có lỗi! ", Toast.LENGTH_SHORT).show();
                                     }
 
 
@@ -109,7 +109,7 @@ public class DeleteAirport extends AppCompatActivity {
 
             // call the constructor of CustomAdapter to send the reference and data to Adapter
             alertDialog = new AlertDialog.Builder(DeleteAirport.this).create();
-            alertDialog.setMessage("Getting Airports info..");
+            alertDialog.setMessage("Lấy thông tin sân bay...");
             alertDialog.show();
             final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
             Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call2 = apiService.getAllAirports(TOKEN_ID_ADMIN);
@@ -124,7 +124,7 @@ public class DeleteAirport extends AppCompatActivity {
                             alertDialog.dismiss();
                             tripList2 = response.body().getMessage();
                             if (tripList2.size() == 0) {
-                                Toast.makeText(DeleteAirport.this, "No Flights Available !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DeleteAirport.this, "Không có sân bay có sẵn !", Toast.LENGTH_SHORT).show();
                             }
                             AirportAdapter customAdapter = new AirportAdapter(DeleteAirport.this, response.body().getMessage());
                             recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
@@ -135,7 +135,7 @@ public class DeleteAirport extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                         alertDialog.dismiss();
-                        Toast.makeText(DeleteAirport.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DeleteAirport.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
 
                     }
@@ -144,13 +144,13 @@ public class DeleteAirport extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.DeleteAirport.DeleteAirport> call, Throwable t) {
                     alertDialog.dismiss();
-                    Toast.makeText(DeleteAirport.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeleteAirport.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                 }
             });
         }catch (Exception e)
         {
             e.printStackTrace();
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Có lỗi!", Toast.LENGTH_SHORT).show();
         }
 
     }

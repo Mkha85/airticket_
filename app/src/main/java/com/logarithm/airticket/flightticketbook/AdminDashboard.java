@@ -101,12 +101,5 @@ public class AdminDashboard extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
     }
 }

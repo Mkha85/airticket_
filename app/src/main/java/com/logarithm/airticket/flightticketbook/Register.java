@@ -40,12 +40,12 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alertDialog = new AlertDialog.Builder(Register.this).create();
-                alertDialog.setMessage("Registering... ");
+                alertDialog.setMessage("Đang đăng ký... ");
                 alertDialog.show();
 
                 if (edt_pass.getText().length() > 0 && edt_username.getText().length() > 0) {
 
-                    //   Credentials credentials=new Credentials(editTextUserId.getText().toString(),editTextPassword.getText().toString());
+                   
                     com.logarithm.airticket.flightticketbook.ParametersClass.Register credentials = new com.logarithm.airticket.flightticketbook.ParametersClass.Register(edt_username.getText().toString(), edt_pass.getText().toString(),edt_name.getText().toString());
 
                     final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
@@ -56,16 +56,16 @@ public class Register extends AppCompatActivity {
                             try {
                                 alertDialog.dismiss();
                                 if (response.body().getSuccess()) {
-                                    Toast.makeText(Register.this, "Sucessfully Registered !", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register.this, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(),Login.class));
                                     finish();
                                 } else {
-                                    Toast.makeText(Register.this,"User already exist !", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register.this,"Người dùng đã tồn tại !", Toast.LENGTH_SHORT).show();
                                 }
                                    alertDialog.dismiss();
 
                             } catch (Exception e) {
-                                Toast.makeText(Register.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Register.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             alertDialog.dismiss();
 
@@ -74,7 +74,7 @@ public class Register extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<com.logarithm.airticket.flightticketbook.ModelClass.Register.Register> call, Throwable t) {
-                            Toast.makeText(Register.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Register.this, "Có lỗi!", Toast.LENGTH_SHORT).show();
                             t.printStackTrace();
                             alertDialog.dismiss();
 
@@ -82,7 +82,7 @@ public class Register extends AppCompatActivity {
                     });
                 } else {
                     alertDialog.dismiss();
-                    Toast.makeText(Register.this, "Fields cannot be blank !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, "Không được để trống !", Toast.LENGTH_SHORT).show();
                 }
             }
         });

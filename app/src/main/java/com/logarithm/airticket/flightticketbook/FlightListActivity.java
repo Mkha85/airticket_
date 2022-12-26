@@ -63,7 +63,7 @@ public class FlightListActivity extends AppCompatActivity {
         try {
             // call the constructor of CustomAdapter to send the reference and data to Adapter
             alertDialog = new AlertDialog.Builder(FlightListActivity.this).create();
-            alertDialog.setMessage("Getting flights info..");
+            alertDialog.setMessage("Lấy thông tin các chuyến bay...");
             alertDialog.show();
             final APIInterface apiService = APIClient.getClient().create(APIInterface.class);
             GetSpecFlight getSpecFlight=new GetSpecFlight(Source,Destination);
@@ -78,7 +78,7 @@ public class FlightListActivity extends AppCompatActivity {
                             alertDialog.dismiss();
                             tripList = response.body().getMessage();
                             if (tripList.size() == 0) {
-                                Toast.makeText(FlightListActivity.this, "No Flights Available !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(FlightListActivity.this, "Không có chuyến bay có sẵn !", Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 Toast.makeText(FlightListActivity.this, tripList.get(0).getName(), Toast.LENGTH_SHORT).show();
@@ -86,22 +86,11 @@ public class FlightListActivity extends AppCompatActivity {
 
                                flights = new ArrayList<>();
                                 recyclerView=(RecyclerView)findViewById(R.id.recyclerview);
-
-//                            for (int i = 0; i < tripList.size(); i++) {
-//                                RecyclerMessage beanClassForRecyclerView_contacts = new RecyclerMessage(tripList.get(i).getName(),tripList.get(i).getSource(),tripList.get(i).getSource(),imgPlane[i],
-//                                            tripList.get(i).getDestination(), tripList.get(i).getDestination(),btnBuy[i]);
-//                               flights.addAll(tripList);
-//                           }
-
                                 mAdapter = new RecyclerAdapter_Flight(FlightListActivity.this,tripList);
-
                                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(FlightListActivity.this);
                                 recyclerView.setLayoutManager(mLayoutManager);
                                 recyclerView.setAdapter(mAdapter);
-
                             }
-
-
                         } else {
                             Log.i("TEST", response.body().getMessage().toString());
                         }
@@ -116,19 +105,12 @@ public class FlightListActivity extends AppCompatActivity {
                     alertDialog.dismiss();
                     t.printStackTrace();
                     Toast.makeText(FlightListActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-         //           Toast.makeText(FlightListActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                 }
             });
-
-
         }catch (Exception e)
         {
             e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
-
-
-
     }
 }

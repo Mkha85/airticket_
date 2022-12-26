@@ -41,7 +41,7 @@ public class AddAirport extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alertDialog = new AlertDialog.Builder(AddAirport.this).create();
-                alertDialog.setMessage("Adding Flight... ");
+                alertDialog.setMessage("Thêm sân bay... ");
                 alertDialog.show();
                 if (name.getText().length() > 0  )  {
                     final APIInterface apiService = APIClient.getClient().create(APIInterface.class);

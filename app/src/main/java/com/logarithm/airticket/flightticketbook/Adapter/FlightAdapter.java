@@ -14,9 +14,7 @@ import com.logarithm.airticket.flightticketbook.R;
 
 import java.util.List;
 
-/**
- * Created by KURPC on 03-02-2018.
- */
+
 
 public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightViewHolder> {
 

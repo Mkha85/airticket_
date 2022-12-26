@@ -1,8 +1,6 @@
 package com.logarithm.airticket.flightticketbook.Adapter;
 
-/**
- * Created by Wolf Soft on 2/1/2017.
- */
+
 
 public class ItemData_Cusine {
 

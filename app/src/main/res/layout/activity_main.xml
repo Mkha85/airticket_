@@ -21,8 +21,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="180dp">
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -31,10 +29,6 @@
             android:layout_marginTop="30dp"
             android:orientation="vertical"
             android:paddingBottom="28dp">
-
-            <!--<include layout="@layout/toolbar_main" />-->
-
-
             <customfonts.MyTextView_Roboto_Bold
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,16 +51,6 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
-
-                    <customfonts.MyTextView_Lato_Medium
-                        android:id="@+id/text_roundtrip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Thêm chuyến"
-                        android:textColor="@color/textcolor"
-                        android:textSize="28dp" />
-
                     <LinearLayout
                         android:id="@+id/line11"
                         android:layout_width="65dp"
@@ -94,34 +78,6 @@
 
                 </LinearLayout>
 
-
-
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/linear2"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<customfonts.MyTextView_Lato_Medium-->
-                        <!--android:id="@+id/text_oneway"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:text="One Way"-->
-                        <!--android:textColor="#837a7a"-->
-                        <!--android:textSize="28dp" />-->
-
-                    <!--<LinearLayout-->
-                        <!--android:id="@+id/line22"-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:visibility="invisible"-->
-                        <!--android:layout_marginLeft="4dp"-->
-                        <!--android:layout_width="65dp"-->
-                        <!--android:layout_height="2dp"-->
-                        <!--android:background="#000" />-->
-
-                <!--</LinearLayout>-->
 
             </LinearLayout>
 
@@ -194,31 +150,6 @@
                 android:layout_marginLeft="30dp"
                 android:background="#edecf2" />
 
-            <!--<customfonts.MyTextView_Roboto_Regular-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="9dp"-->
-                <!--android:layout_marginLeft="32dp"-->
-                <!--android:text="Passengers" />-->
-
-            <!--<Spinner-->
-                <!--android:id="@+id/spinnerPassengers"-->
-                <!--android:layout_width="150dp"-->
-                <!--android:layout_height="29dp"-->
-                <!--android:layout_marginBottom="18dp"-->
-                <!--android:background="@android:color/transparent"-->
-                <!--android:entries="@array/no_arrays"-->
-                <!--android:maxLength="10"-->
-                <!--android:maxLines="1"-->
-                <!--android:paddingLeft="31dp"-->
-                <!--android:prompt="@string/country_prompt" />-->
-
-            <!--<View-->
-                <!--android:layout_width="130dp"-->
-                <!--android:layout_height="1.5dp"-->
-                <!--android:layout_marginBottom="15dp"-->
-                <!--android:layout_marginLeft="30dp"-->
-                <!--android:background="#edecf2" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -243,34 +174,6 @@
                 android:paddingLeft="31dp"
                 android:text=""
                 android:theme="@style/MineCustomTabText" />
-
-            <!--<View-->
-                <!--android:layout_width="130dp"-->
-                <!--android:layout_height="1.5dp"-->
-                <!--android:layout_marginBottom="15dp"-->
-                <!--android:layout_marginLeft="30dp"-->
-                <!--android:background="#edecf2" />-->
-
-            <!--<customfonts.MyTextView_Roboto_Regular-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="9dp"-->
-                <!--android:layout_marginLeft="32dp"-->
-                <!--android:text="Return" />-->
-
-            <!--<customfonts.EditText_Roboto_Regular-->
-                <!--android:id="@+id/txtdata2"-->
-                <!--android:layout_width="150dp"-->
-                <!--android:clickable="true"-->
-                <!--android:editable="false"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="20dp"-->
-                <!--android:theme="@style/MineCustomTabText"-->
-                <!--android:background="@android:color/transparent"-->
-                <!--android:paddingLeft="31dp"-->
-                <!--android:text=""-->
-                <!--tools:ignore="DuplicateIds" />-->
-
             <View
                 android:layout_width="130dp"
                 android:layout_height="1.5dp"
